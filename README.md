@@ -37,6 +37,8 @@ cd gym-simple-rl
    - Visit the [Miniconda website](https://docs.conda.io/en/latest/miniconda.html) and download the appropriate installer for your operating system.
    - Follow the installation instructions for your platform.
 
+3. Create a new Conda environment:
+
 ```
 conda env create -f environment.yml
 ```
