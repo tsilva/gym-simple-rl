@@ -135,3 +135,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - [ ] Add support for additional environments
 - [ ] Softcode Optuna storage
+- [ ] Tune hyperparams and commit results
+- [ ] Plot results for different algorithms
