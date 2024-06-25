@@ -130,10 +130,3 @@ tensorboard --logdir=runs/cartpole
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## TODO
-
-- [ ] Add support for additional environments
-- [ ] Softcode Optuna storage
-- [ ] Tune hyperparams and commit results
-- [ ] Plot results for different algorithms
