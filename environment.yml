@@ -1,0 +1,16 @@
+name: gym-simple-rl
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - pip
+  - numpy
+  - matplotlib
+  - pytorch
+  - pip:
+    - optuna
+    - gymnasium
+    - gymnasium[classic-control]
+    - tensorboard
