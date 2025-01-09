@@ -1,8 +1,8 @@
-# gym-simple-rl
+# gym-simple-rl 🤖
 
-This project implements various reinforcement learning algorithms to solve the CartPole environment from OpenAI Gym (now [Gymnasium](https://gymnasium.farama.org/index.html)). It supports training, evaluation, and hyperparameter tuning for different algorithms.
+A hands-on exploration of reinforcement learning algorithms solving the CartPole environment from OpenAI Gym (now [Gymnasium](https://gymnasium.farama.org/index.html)). Perfect for learning and experimenting with RL basics!
 
-**Note**: This project was built for self-instructional and experimentation purposes with extensive assistance from various Large Language Models (LLMs).
+**Note**: This project was built for self-learning and experimentation purposes with extensive assistance from various Large Language Models (LLMs). 🤝
 
 ## Table of Contents
 - [Supported Algorithms](#supported-algorithms)
@@ -15,7 +15,7 @@ This project implements various reinforcement learning algorithms to solve the C
 - [Contributing](#contributing)
 - [License](#license)
 
-## Supported Algorithms
+## Supported Algorithms 🧮
 
 - Q-Learning
 - SARSA
@@ -24,7 +24,7 @@ This project implements various reinforcement learning algorithms to solve the C
 - SARSA with Eligibility Traces (SARSA(λ))
 - True Online SARSA(λ)
 
-## Installation
+## Installation 🔧
 
 1. Clone this repository:
 
@@ -49,11 +49,11 @@ conda env create -f environment.yml
 conda activate gym-simple-rl
 ```
 
-## Usage
+## Usage 🎮
 
-The script can be run in three modes:
+The script supports three main modes of operation:
 
-### Train
+### Train 📚
 
 Train an agent using a specific algorithm:
 
@@ -66,7 +66,7 @@ Example:
 python gym_simple_rl.py train --algo qlearning --seeds 123
 ```
 
-### Evaluate
+### Evaluate 📊
 
 Evaluate a trained model:
 
@@ -79,7 +79,7 @@ Example:
 python gym_simple_rl.py eval --model_path output/best_cartpole_model.npy
 ```
 
-### Tune
+### Tune ⚡
 
 Perform hyperparameter optimization:
 
@@ -96,9 +96,9 @@ Additional arguments:
 - `--n_timesteps`: Number of timesteps for training (default: 500,000)
 - `--trial_prune_interval`: Interval for pruning trials in Optuna (default: 500)
 
-## Configuration
+## Configuration ⚙️
 
-The script uses a configuration dictionary to set various parameters. You can modify these in the `config` dictionary within the script:
+Customize your experiment through the configuration dictionary:
 
 - Environment ID
 - State discretization settings
@@ -106,27 +106,28 @@ The script uses a configuration dictionary to set various parameters. You can mo
 - Exploration parameters (epsilon min/max, decay rate)
 - Algorithm-specific parameters (e.g., λ for eligibility trace methods)
 
-## Key Components
+## Key Components 🔑
 
-1. **State Discretization**: Converts continuous state space to discrete for tabular methods.
-2. **Action Selection**: Implements ε-greedy policy for exploration-exploitation balance.
-3. **Learning Functions**: Separate functions for each supported algorithm.
-4. **Training Loop**: Implements the main training process for all algorithms.
-5. **Evaluation**: Renders the environment to visualize trained agent's performance.
-6. **Hyperparameter Tuning**: Uses Optuna for optimizing hyperparameters.
+1. **State Discretization** 📊: Smart conversion of continuous state space to discrete values
+2. **Action Selection** 🎯: Implements ε-greedy policy for balanced exploration
+3. **Learning Functions** 🧠: Clean implementation of each supported algorithm
+4. **Training Loop** 🔄: Efficient main training process
+5. **Evaluation** 👀: Visual feedback of your agent's performance
+6. **Hyperparameter Tuning** 🎛️: Optuna-powered optimization
 
-## Logging and Visualization
+## Logging and Visualization 📈
 
-- Console logging using the `logging` module.
-- TensorBoard logging for training metrics.
-- Optional plotting of mean rewards over episodes.
+Track your agent's progress with:
+- Console logging for real-time updates
+- TensorBoard logging for detailed metrics
+- Optional reward plotting
 
-To view TensorBoard logs:
+Fire up TensorBoard to see your results:
 
 ```
 tensorboard --logdir=runs/cartpole
 ```
 
-## License
+## License 📜
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
