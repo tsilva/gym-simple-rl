@@ -58,12 +58,12 @@ The script supports three main modes of operation:
 Train an agent using a specific algorithm:
 
 ```
-python gym_simple_rl.py train --algo <algorithm_name> --seeds <seed_values>
+python main.py train --algo <algorithm_name> --seeds <seed_values>
 ```
 
 Example:
 ```
-python gym_simple_rl.py train --algo qlearning --seeds 123
+python main.py train --algo qlearning --seeds 123
 ```
 
 ### Evaluate 📊
@@ -71,12 +71,12 @@ python gym_simple_rl.py train --algo qlearning --seeds 123
 Evaluate a trained model:
 
 ```
-python gym_simple_rl.py eval --model_path <path_to_model>
+python main.py eval --model_path <path_to_model>
 ```
 
 Example:
 ```
-python gym_simple_rl.py eval --model_path output/best_cartpole_model.npy
+python main.py eval --model_path output/best_cartpole_model.npy
 ```
 
 ### Tune ⚡
@@ -84,12 +84,12 @@ python gym_simple_rl.py eval --model_path output/best_cartpole_model.npy
 Perform hyperparameter optimization:
 
 ```
-python gym_simple_rl.py tune --study_name <study_name> --seeds <seed_values> --n_trials <num_trials> --algo <algorithm_name>
+python main.py tune --study_name <study_name> --seeds <seed_values> --n_trials <num_trials> --algo <algorithm_name>
 ```
 
 Example:
 ```
-python gym_simple_rl.py tune --study_name sarsa_study --seeds 123 456 789 --n_trials 100 --algo sarsa
+python main.py tune --study_name sarsa_study --seeds 123 456 789 --n_trials 100 --algo sarsa
 ```
 
 Additional arguments:
