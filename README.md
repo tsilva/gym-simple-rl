@@ -1,133 +1,130 @@
-# gym-simple-rl 🤖
+<div align="center">
+  <img src="logo.png" alt="gym-simple-rl" width="512"/>
 
-A hands-on exploration of reinforcement learning algorithms solving the CartPole environment from OpenAI Gym (now [Gymnasium](https://gymnasium.farama.org/index.html)). Perfect for learning and experimenting with RL basics!
+  # gym-simple-rl
 
-**Note**: This project was built for self-learning and experimentation purposes with extensive assistance from various Large Language Models (LLMs). 🤝
+  [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
+  [![Gymnasium](https://img.shields.io/badge/Gymnasium-CartPole--v1-brightgreen.svg)](https://gymnasium.farama.org/)
+  [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+  [![TensorBoard](https://img.shields.io/badge/TensorBoard-Enabled-orange.svg)](https://www.tensorflow.org/tensorboard)
 
-## Table of Contents
-- [Supported Algorithms](#supported-algorithms)
-- [Installation](#installation)
-- [Miniconda Setup](#miniconda-setup)
-- [Usage](#usage)
-- [Configuration](#configuration)
-- [Key Components](#key-components)
-- [Logging and Visualization](#logging-and-visualization)
-- [Contributing](#contributing)
-- [License](#license)
+  **🎮 Learn reinforcement learning by training tabular agents to balance CartPole 🤖**
 
-## Supported Algorithms 🧮
+  [Quick Start](#quick-start) · [Algorithms](#supported-algorithms) · [Hyperparameter Tuning](#hyperparameter-tuning)
+</div>
 
-- Q-Learning
-- SARSA
-- Expected SARSA
-- Q-Learning with Eligibility Traces (Q(λ))
-- SARSA with Eligibility Traces (SARSA(λ))
-- True Online SARSA(λ)
+## Overview
 
-## Installation 🔧
+A hands-on implementation of classic tabular reinforcement learning algorithms for the CartPole-v1 environment. Designed for learning and experimentation with RL fundamentals—all algorithms in a single, readable Python file.
 
-1. Clone this repository:
+## Supported Algorithms
 
-```
+| Algorithm | Type | Description |
+|-----------|------|-------------|
+| `qlearning` | Off-policy | Classic Q-Learning with greedy target |
+| `sarsa` | On-policy | State-Action-Reward-State-Action |
+| `expected_sarsa` | On-policy | SARSA with expected value updates |
+| `qlearning_lambda` | Off-policy | Q-Learning with eligibility traces |
+| `sarsa_lambda` | On-policy | SARSA with eligibility traces |
+| `true_online_sarsa_lambda` | On-policy | True Online SARSA(λ) for faster credit assignment |
+
+## Quick Start
+
+### Installation
+
+```bash
+# Clone the repository
 git clone https://github.com/tsilva/gym-simple-rl.git
 cd gym-simple-rl
-```
 
-2. Install Miniconda:
-   - Visit the [Miniconda website](https://docs.conda.io/en/latest/miniconda.html) and download the appropriate installer for your operating system.
-   - Follow the installation instructions for your platform.
-
-3. Create a new Conda environment:
-
-```
+# Create and activate conda environment
 conda env create -f environment.yml
-```
-
-3. Activate the new environment:
-
-```
 conda activate gym-simple-rl
 ```
 
-## Usage 🎮
+### Train an Agent
 
-The script supports three main modes of operation:
-
-### Train 📚
-
-Train an agent using a specific algorithm:
-
-```
-python main.py train --algo <algorithm_name> --seeds <seed_values>
-```
-
-Example:
-```
+```bash
 python main.py train --algo qlearning --seeds 123
 ```
 
-### Evaluate 📊
+### Evaluate a Trained Model
 
-Evaluate a trained model:
-
-```
-python main.py eval --model_path <path_to_model>
+```bash
+python main.py eval --model_path outputs/best_cartpole_model.npy
 ```
 
-Example:
-```
-python main.py eval --model_path output/best_cartpole_model.npy
-```
+## Hyperparameter Tuning
 
-### Tune ⚡
+Run Optuna-powered hyperparameter optimization with multi-seed evaluation:
 
-Perform hyperparameter optimization:
-
-```
-python main.py tune --study_name <study_name> --seeds <seed_values> --n_trials <num_trials> --algo <algorithm_name>
-```
-
-Example:
-```
+```bash
 python main.py tune --study_name sarsa_study --seeds 123 456 789 --n_trials 100 --algo sarsa
 ```
 
-Additional arguments:
-- `--n_timesteps`: Number of timesteps for training (default: 500,000)
-- `--trial_prune_interval`: Interval for pruning trials in Optuna (default: 500)
+| Argument | Default | Description |
+|----------|---------|-------------|
+| `--n_timesteps` | 5,000,000 | Training duration |
+| `--n_trials` | 100 | Number of Optuna trials |
+| `--trial_prune_interval` | 500 | Episodes between pruning checks |
 
-## Configuration ⚙️
+## Monitoring
 
-Customize your experiment through the configuration dictionary:
+Track training progress with TensorBoard:
 
-- Environment ID
-- State discretization settings
-- Learning parameters (learning rate, discount factor, etc.)
-- Exploration parameters (epsilon min/max, decay rate)
-- Algorithm-specific parameters (e.g., λ for eligibility trace methods)
-
-## Key Components 🔑
-
-1. **State Discretization** 📊: Smart conversion of continuous state space to discrete values
-2. **Action Selection** 🎯: Implements ε-greedy policy for balanced exploration
-3. **Learning Functions** 🧠: Clean implementation of each supported algorithm
-4. **Training Loop** 🔄: Efficient main training process
-5. **Evaluation** 👀: Visual feedback of your agent's performance
-6. **Hyperparameter Tuning** 🎛️: Optuna-powered optimization
-
-## Logging and Visualization 📈
-
-Track your agent's progress with:
-- Console logging for real-time updates
-- TensorBoard logging for detailed metrics
-- Optional reward plotting
-
-Fire up TensorBoard to see your results:
-
-```
+```bash
 tensorboard --logdir=runs/cartpole
 ```
 
-## License 📜
+Metrics logged:
+- Episode reward
+- Mean reward (rolling 100 episodes)
+- Best mean reward
+- Exploration rate (epsilon)
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Architecture
+
+```
+main.py (480 lines)
+├── State discretization (continuous → discrete buckets)
+├── ε-greedy action selection
+├── Learning functions (_learn__<algo>)
+├── Training loop with early stopping
+└── Optuna integration (TPESampler + HyperbandPruner)
+```
+
+### State Discretization
+
+CartPole's continuous state space is discretized into `(12, 24, 12, 24)` buckets for cart position, cart velocity, pole angle, and angular velocity.
+
+### Configuration
+
+Default hyperparameters can be overridden via `rl/cartpole/hyperparams.json`:
+
+```json
+{
+  "qlearning": {
+    "learning_rate": 0.1,
+    "discount_factor": 0.99,
+    "epsilon_decay_rate": 0.995
+  }
+}
+```
+
+## Dependencies
+
+- [Gymnasium](https://gymnasium.farama.org/) - Environment interface
+- [NumPy](https://numpy.org/) - Q-table and numerical operations
+- [Optuna](https://optuna.org/) - Hyperparameter optimization
+- [TensorBoard](https://www.tensorflow.org/tensorboard) - Metrics visualization
+- [Matplotlib](https://matplotlib.org/) - Optional reward plotting
+
+## License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+---
+
+<div align="center">
+  <sub>Built for learning and experimentation with assistance from LLMs</sub>
+</div>
