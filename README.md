@@ -1,3 +1,9 @@
+> [!WARNING]
+> ## Archived
+> This project is archived and no longer maintained.
+>
+> It has been superseded by [gymsolve](https://github.com/tsilva/gymsolve), which builds on these foundations with a more complete and flexible approach.
+
 <div align="center">
   <img src="logo.png" alt="gym-simple-rl" width="512"/>
 
